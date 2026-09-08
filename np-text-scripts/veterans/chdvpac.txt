@@ -5,15 +5,33 @@ Good Morning/Afternoon/Evening, <B>--A--first_name--B-- --A--last_name--B--</B>(
 
 ON SCREEN ONLY PITCH NAME ON SCREEN
 
-Sir/Mam as a paid caller for <B>GOOD MERITS</B> the reason for the ORIGINAL call is that my records show you we spoke to you on <span style="background-color: #FFFF00">(last month)</B></SPAN> when you pledged your support to these <B>VETERANS</B> and were sent a receipt and return envelope. Now that you have the receipt can you make your donation with a debit or credit card today?
+SIR/MA'AM THE REASON FOR THE CALL IS THAT MY RECORDS SHOW YOU WERE GENEROUS ENOUGH TO MAKE A PLEDGE TO SUPPORT THE ORGANIZATION BACK IN <span style="background-color: #FFFF00">(--A--comments--B--)</SPAN>. DO YOU REMEMBER MAKING THAT PLEDGE?
 
-IF DONOR ASK WHAT THEY PLEDGED
-AMOUNT OF PLEDGE WAS <span style="background-color: #FFFF00">$(--A--security_phrase--B--)</B>
-</SPAN> 
+<span style="background-color: #00ffff"> IF YES-</SPAN>
 
-<span style="background-color: #00ffff">IF YES</SPAN> 
-<B>(FIRST ASK)<B> GREAT, ARE YOU USING A DEBIT OR CREDIT CARD TODAY?<B>
-<span style="background-color: #FFFF00">PLEASE HOLD ON I'M GOING TO TRANSFER YOU TO A SECURE LINE SO THEY CAN TAKE YOUR CARD INFORMATION.</SPAN>
+GREAT NOW IS THAT <span style="background-color: #FFFF00">$(--A--security_phrase--B--)</SPAN> YOU PLEDGED BACK THEN STILL COMFORTABLE FOR YOU TODAY?
+
+IF YES- OK GREAT, WELL SINCE WE SPOKE TO YOU BACK IN <span style="background-color: #FFFF00">(--A--comments--B--)</SPAN> WE MAILED YOU TWO PLEDGE KITS WITH RECEIPTS, WHICH UNFORTUNATELY HAVE NOT BEEN RETURNED, BUT NOW THAT YOU HAVE THE RECEIPT CAN YOU HONOR THAT PLEDGE TO THE VETERANS WITH A CREDIT OR DEBIT CARD TODAY, ONE TIME FOR THE DRIVE?
+
+<span style="background-color: #80ff00"> IF NO</SPAN>
+
+OH REALLY? WELL IT DOES SHOW HERE WHEN WE SPOKE TO YOU BACK ON <span style="background-color: #FFFF00">(--A--comments--B--)</SPAN> YOU WERE GENEROUS ENOUGH TO PLEDGE <span style="background-color: #FFFF00">$(--A--security_phrase--B--)</SPAN> TO SUPPORT LEGISLATORS WHO WORK TO KEEP COMMUNITIES SAFE AS WELL AS SUPPORT ASSISTANCE TO THE FAMILIES OF VETERANS KILLED IN THE LINE OF DUTY.
+
+NOW IS THAT <span style="background-color: #FFFF00">$(--A--security_phrase--B--)</SPAN> YOU PLEDGED BACK THEN STILL COMFORTABLE FOR YOU TODAY?
+
+GREAT, AND YOUR NAME IS <B>--A--first_name--B-- --A--last_name--B--</B>
+
+IF YES- OK GREAT, WELL WE DID MAIL YOU TWO PLEDGE KITS WHICH UNFORTUNATELY HAVE NOT BEEN RETURNED, BUT NOW THAT YOU HAVE THE RECEIPT CAN YOU HONOR THAT PLEDGE TO THE VETERANS WITH A CREDIT OR DEBIT CARD TODAY, ONE TIME FOR THE DRIVE?
+
+UPSALES 
+
+Great MR/MRS <B>--A--first_name--B-- --A--last_name--B--</B> being that we are closing this out now and your help is so needed for this important cause and to offset the postage and printing costs of the mailings we sent you would you be able to reach up and help out with the BADGE OF HONOR pledge which is an additional $15?
+
+(If No to additional $15) OK no problem. How about the booster pledge which is only an extra $5.
+
+<B>Thank you for your support for THE COALITION FOR HOMELESS AND DISABLED VETERANS PAC.</B>
+
+IF they still do not want to use card ask them to mail the donation in today they are counting on your promise of donation of <span style="background-color: #FFFF00">$(--A--security_phrase--B--)</SPAN>. Thank You for your support
 
 <p id="NONPAID REBUTTALS"></p>
 <U><B><CENTER>NONPAID REBUTTALS</CENTER></B></U>

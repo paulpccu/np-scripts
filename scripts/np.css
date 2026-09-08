@@ -76,6 +76,10 @@ pre {
   background-color: #00ffff;
 }
 
+.highlight-green {
+  background-color: #80ff00;
+}
+
 .bold {
   font-weight: bold;
 }

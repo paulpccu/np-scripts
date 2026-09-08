@@ -90,10 +90,45 @@
     }).join("");
   }
 
+  function isPoliticalScript(camp, qAndA) {
+    const text = (camp.name + " " + (qAndA || "")).toUpperCase();
+    return /\b527\b/.test(text) || /\bPAC\b/.test(text) || text.indexOf("POLITICAL COMMITTEE") !== -1 || text.indexOf("FEC COMPLIANCE") !== -1;
+  }
+
+  function renderPoliticalAsk(camp, words) {
+    const group = words.donorGroup.toLowerCase();
+    const campNameAfterThe = camp.name.replace(/^THE\s+/i, "");
+    return [
+      '<p>SIR/MA\'AM THE REASON FOR THE CALL IS THAT MY RECORDS SHOW YOU WERE GENEROUS ENOUGH TO MAKE A PLEDGE TO SUPPORT THE ORGANIZATION BACK IN <span class="highlight-yellow">(<span id="comments">--A--comments--B--</span>)</span>. DO YOU REMEMBER MAKING THAT PLEDGE?</p>',
+      '<p><span class="highlight-cyan">IF YES</span></p>',
+      '<p>GREAT NOW IS THAT <span class="highlight-yellow">$<span id="security_phrase_display">--A--security_phrase--B--</span></span> YOU PLEDGED BACK THEN STILL COMFORTABLE FOR YOU TODAY?</p>',
+      '<p>IF YES - OK GREAT, WELL SINCE WE SPOKE TO YOU BACK IN <span class="highlight-yellow">(<span id="comments_repeat">--A--comments--B--</span>)</span> WE MAILED YOU TWO PLEDGE KITS WITH RECEIPTS, WHICH UNFORTUNATELY HAVE NOT BEEN RETURNED, BUT NOW THAT YOU HAVE THE RECEIPT CAN YOU HONOR THAT PLEDGE TO THE ' + group + ' WITH A CREDIT OR DEBIT CARD TODAY, ONE TIME FOR THE DRIVE?</p>',
+      '<p><span class="highlight-green">IF NO</span></p>',
+      '<p>OH REALLY? WELL IT DOES SHOW HERE WHEN WE SPOKE TO YOU BACK ON <span class="highlight-yellow">(<span id="comments_no">--A--comments--B--</span>)</span> YOU WERE GENEROUS ENOUGH TO PLEDGE <span class="highlight-yellow">$<span id="security_phrase_repeat">--A--security_phrase--B--</span></span> TO SUPPORT LEGISLATORS WHO WORK TO KEEP COMMUNITIES SAFE AS WELL AS SUPPORT ASSISTANCE TO THE FAMILIES OF ' + group + ' KILLED IN THE LINE OF DUTY.</p>',
+      '<p>NOW IS THAT <span class="highlight-yellow">$<span id="security_phrase_repeat_two">--A--security_phrase--B--</span></span> YOU PLEDGED BACK THEN STILL COMFORTABLE FOR YOU TODAY?</p>',
+      '<p>GREAT, AND YOUR NAME IS <b><span id="first_name_repeat">--A--first_name--B--</span> <span id="last_name_repeat">--A--last_name--B--</span></b></p>',
+      '<p>IF YES - OK GREAT, WELL WE DID MAIL YOU TWO PLEDGE KITS WHICH UNFORTUNATELY HAVE NOT BEEN RETURNED, BUT NOW THAT YOU HAVE THE RECEIPT CAN YOU HONOR THAT PLEDGE TO THE ' + group + ' WITH A CREDIT OR DEBIT CARD TODAY, ONE TIME FOR THE DRIVE?</p>',
+      '<p><b>UPSALES</b></p>',
+      '<p>Great MR/MRS <b><span id="first_name_upsale">--A--first_name--B--</span> <span id="last_name_upsale">--A--last_name--B--</span></b> being that we are closing this out now and your help is so needed for this important cause and to offset the postage and printing costs of the mailings we sent you would you be able to reach up and help out with the BADGE OF HONOR pledge which is an additional $15?</p>',
+      '<p>(If No to additional $15) OK no problem. How about the booster pledge which is only an extra $5.</p>',
+      '<p><b>Thank you for your support for THE ' + campNameAfterThe + '.</b></p>',
+      '<p>IF they still do not want to use card ask them to mail the donation in today they are counting on your promise of donation of <span class="highlight-yellow">$<span id="security_phrase_mail">--A--security_phrase--B--</span></span>. Thank You for your support</p>'
+    ].join("");
+  }
+
+  function renderStandardAsk(pitch) {
+    return [
+      '<p>' + pitch + '</p>',
+      '<p><b>IF DONOR ASK WHAT THEY PLEDGED</b><br />AMOUNT OF PLEDGE WAS <span class="highlight-yellow">$<span id="security_phrase_display">--A--security_phrase--B--</span></span></p>',
+      '<p><span class="highlight-cyan">IF YES</span><br /><b>(FIRST ASK) GREAT, ARE YOU USING A DEBIT OR CREDIT CARD TODAY?</b><br /><span class="highlight-yellow">PLEASE HOLD ON I AM GOING TO TRANSFER YOU TO A SECURE LINE SO THEY CAN TAKE YOUR CARD INFORMATION.</span></p>'
+    ].join("");
+  }
+
   function renderScript(camp) {
     const words = groupWords(camp.category);
     const crownQAndA = window.NP_QNAS && window.NP_QNAS[camp.code];
     const qAndA = crownQAndA || (camp.code === "dare" ? renderDareQuestions() : renderDefaultQuestions(camp, words));
+    const isPolitical = isPoliticalScript(camp, qAndA);
     const isInbound = window.NP_SCRIPT_MODE === "inbound";
     const titleSuffix = isInbound ? " INBOUND" : "";
     const greeting = isInbound
@@ -102,6 +137,7 @@
     const pitch = isInbound
       ? 'Sir/Mam as a paid caller for <b>GOOD MERITS</b> my records show we spoke to you on <span class="highlight-yellow">(last month)</span> when you pledged your support to ' + words.supporters + ' and were sent a receipt and return envelope. We are currently wrapping up our benefit drive and now that you have the receipt can you make your donation with a debit or credit card today?'
       : 'Sir/Mam as a paid caller for <b>GOOD MERITS</b> the reason for the ORIGINAL call is that my records show you we spoke to you on <span class="highlight-yellow">(last month)</span> when you pledged your support to ' + words.supporters + ' and were sent a receipt and return envelope. Now that you have the receipt can you make your donation with a debit or credit card today?';
+    const mainAsk = isPolitical ? renderPoliticalAsk(camp, words) : renderStandardAsk(pitch);
 
     document.title = "NONPAID " + camp.name + titleSuffix;
     document.body.innerHTML =
@@ -110,9 +146,7 @@
       '<p><span class="highlight-red bold">ASSUME NAME ON SCREEN ONLY PITCH NAME ON SCREEN</span></p>' +
       '<p>' + greeting + '</p>' +
       '<p>ON SCREEN ONLY PITCH NAME ON SCREEN</p>' +
-      '<p>' + pitch + '</p>' +
-      '<p><b>IF DONOR ASK WHAT THEY PLEDGED</b><br />AMOUNT OF PLEDGE WAS <span class="highlight-yellow">$<span id="security_phrase_display">--A--security_phrase--B--</span></span></p>' +
-      '<p><span class="highlight-cyan">IF YES</span><br /><b>(FIRST ASK) GREAT, ARE YOU USING A DEBIT OR CREDIT CARD TODAY?</b><br /><span class="highlight-yellow">PLEASE HOLD ON I AM GOING TO TRANSFER YOU TO A SECURE LINE SO THEY CAN TAKE YOUR CARD INFORMATION.</span></p>' +
+      mainAsk +
       '</section>' +
       '<section id="NONPAID_REBUTTALS">' +
       '<h2>NONPAID REBUTTALS</h2>' +
@@ -145,7 +179,17 @@
 
     setText("first_name", getParam(params, ["first_name"], "--A--first_name--B--"));
     setText("last_name", getParam(params, ["last_name"], "--A--last_name--B--"));
+    setText("first_name_repeat", getParam(params, ["first_name"], "--A--first_name--B--"));
+    setText("last_name_repeat", getParam(params, ["last_name"], "--A--last_name--B--"));
+    setText("first_name_upsale", getParam(params, ["first_name"], "--A--first_name--B--"));
+    setText("last_name_upsale", getParam(params, ["last_name"], "--A--last_name--B--"));
     setText("security_phrase_display", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
+    setText("security_phrase_repeat", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
+    setText("security_phrase_repeat_two", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
+    setText("security_phrase_mail", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
+    setText("comments", getParam(params, ["comments"], "--A--comments--B--"));
+    setText("comments_repeat", getParam(params, ["comments"], "--A--comments--B--"));
+    setText("comments_no", getParam(params, ["comments"], "--A--comments--B--"));
     setText("address", getParam(params, ["address1", "address"], "--A--address1--B--"));
     setText("address_repeat", getParam(params, ["address1", "address"], "--A--address1--B--"));
   });
