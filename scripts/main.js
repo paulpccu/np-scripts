@@ -96,7 +96,7 @@
   }
 
   function renderPoliticalAsk(camp, words) {
-    const group = words.donorGroup.toLowerCase();
+    const group = words.donorGroup;
     const campNameAfterThe = camp.name.replace(/^THE\s+/i, "");
     return [
       '<p>SIR/MA\'AM THE REASON FOR THE CALL IS THAT MY RECORDS SHOW YOU WERE GENEROUS ENOUGH TO MAKE A PLEDGE TO SUPPORT THE ORGANIZATION BACK IN <span class="highlight-yellow">(<span id="comments">--A--comments--B--</span>)</span>. DO YOU REMEMBER MAKING THAT PLEDGE?</p>',
@@ -187,9 +187,9 @@
     setText("security_phrase_repeat", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
     setText("security_phrase_repeat_two", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
     setText("security_phrase_mail", getParam(params, ["security_phrase"], "--A--security_phrase--B--"));
-    setText("comments", getParam(params, ["comments"], "--A--comments--B--"));
-    setText("comments_repeat", getParam(params, ["comments"], "--A--comments--B--"));
-    setText("comments_no", getParam(params, ["comments"], "--A--comments--B--"));
+    setText("comments", getParam(params, ["comments"], "last month"));
+    setText("comments_repeat", getParam(params, ["comments"], "last month"));
+    setText("comments_no", getParam(params, ["comments"], "last month"));
     setText("address", getParam(params, ["address1", "address"], "--A--address1--B--"));
     setText("address_repeat", getParam(params, ["address1", "address"], "--A--address1--B--"));
   });
